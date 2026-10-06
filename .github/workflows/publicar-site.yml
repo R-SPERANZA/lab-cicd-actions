@@ -2,7 +2,7 @@
 #
 # Toda vez que alguém envia um arquivo para o GitHub, este robô:
 #
-#   1) VERIFICA o index.html   --tudo certo?-->   2) PUBLICA o site
+#   1) VERIFICA o index.html  --tudo certo?-->  2) PUBLICA o site
 #            |
 #            +--achou problema?--> PARA TUDO. O site antigo continua no ar.
 
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Baixar os arquivos do repositório
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Regra 1 - O arquivo index.html existe?
         run: |
@@ -67,7 +67,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: Baixar os arquivos do repositório
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Conferir se o GitHub Pages está ligado
         id: pages
@@ -93,14 +93,14 @@ jobs:
 
       - name: Empacotar o site
         if: steps.pages.outputs.ligado == 'sim'
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
       - name: Publicar no GitHub Pages
         if: steps.pages.outputs.ligado == 'sim'
         id: publicar
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
 
       - name: Mostrar o endereço do site
         if: steps.pages.outputs.ligado == 'sim'
